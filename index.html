@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài Test Độ Hợp Cạ</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+    .gif-container { margin-bottom: 20px; }
+    .gif-container img { width: 220px; height: auto; }
+    h1 {
+      color: #333333;
+      font-size: 20px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 35px;
+      padding: 0 20px;
+    }
+    .buttons {
+      position: relative;
+      width: 320px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      font-family: inherit;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.1s ease;
+    }
+    #btnYes {
+      background-color: #2b8a3e;
+      color: white;
+      font-size: 22px;
+      padding: 12px 35px;
+      position: absolute;
+      left: 30px;
+    }
+    #btnYes:active { transform: scale(0.95); }
+    #btnNo {
+      background-color: #e03131;
+      color: white;
+      font-size: 11px;
+      padding: 6px 10px;
+      position: absolute;
+      right: 20px;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<div class="gif-container">
+  <!-- Lấy ảnh từ thư mục images trong project -->
+  <img id="mainGif" src="images/bubu-dudu-1.gif" alt="Bubu Dudu Cute">
+</div>
+
+<!-- Dòng chữ tiêu đề -->
+<h1 id="question">Mai à, em đồng ý làm người yêu anh nha :3</h1>
+
+<div class="buttons" id="btnGroup">
+  <button id="btnYes">Có ạ</button>
+  <button id="btnNo">Nằm mơ đi 🤪</button>
+</div>
+
+<script>
+  const btnNo = document.getElementById('btnNo');
+  const btnYes = document.getElementById('btnYes');
+  const question = document.getElementById('question');
+  const mainGif = document.getElementById('mainGif');
+  const btnGroup = document.getElementById('btnGroup');
+
+  const moveButton = () => {
+    const maxX = window.innerWidth - btnNo.clientWidth - 20;
+    const maxY = window.innerHeight - btnNo.clientHeight - 20;
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    btnNo.style.position = 'fixed';
+    btnNo.style.left = randomX + 'px';
+    btnNo.style.top = randomY + 'px';
+  };
+
+  btnNo.addEventListener('mouseover', moveButton);
+  btnNo.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    moveButton();
+  });
+
+  btnYes.addEventListener('click', () => {
+    // Câu trả lời khi nhấn Có
+    question.innerHTML = "Anh không ngờ tới luôn đó, chốt đơn luôn nha Mai! 🥳🎉";
+    // Đổi sang ảnh ôm nhau ăn mừng
+    mainGif.src = "images/bubu-dudu-2.gif";
+    btnGroup.style.display = 'none';
+  });
+</script>
+</body>
+</html>
