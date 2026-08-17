@@ -65,12 +65,10 @@
 <body>
 
 <div class="gif-container">
-  <!-- Lấy ảnh từ thư mục images trong project -->
   <img id="mainGif" src="images/bubu-dudu-1.gif" alt="Bubu Dudu Cute">
 </div>
 
-<!-- Dòng chữ tiêu đề -->
-<h1 id="question">Mai à, em đồng ý làm người yêu anh nha :3</h1>
+<h1 id="question">Trâm Anh đồng ý làm người yêu anh nha :3</h1>
 
 <div class="buttons" id="btnGroup">
   <button id="btnYes">Có ạ</button>
@@ -87,24 +85,27 @@
   const moveButton = () => {
     const maxX = window.innerWidth - btnNo.clientWidth - 20;
     const maxY = window.innerHeight - btnNo.clientHeight - 20;
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
+    const randomX = Math.floor(Math.random() * Math.max(0, maxX));
+    const randomY = Math.floor(Math.random() * Math.max(0, maxY));
 
     btnNo.style.position = 'fixed';
     btnNo.style.left = randomX + 'px';
     btnNo.style.top = randomY + 'px';
   };
 
-  btnNo.addEventListener('mouseover', moveButton);
-  btnNo.addEventListener('touchstart', (e) => {
-    e.preventDefault();
+  // Bấm lần 1 đổi chữ + di chuyển; các lần tiếp theo nhảy tiếp
+  btnNo.addEventListener('click', () => {
+    if (btnNo.innerHTML === "Nằm mơ đi 🤪") {
+      btnNo.innerHTML = "Hì hì, không được bấm nha...";
+      btnNo.style.fontSize = '12px';
+      btnNo.style.padding = '8px 12px';
+    }
     moveButton();
   });
 
+  // Khi bấm "Có ạ"
   btnYes.addEventListener('click', () => {
-    // Câu trả lời khi nhấn Có
-    question.innerHTML = "Anh không ngờ tới luôn đó, chốt đơn luôn nha Mai! 🥳🎉";
-    // Đổi sang ảnh ôm nhau ăn mừng
+    question.innerHTML = "Anh biết là Trâm Anh sẽ đồng ý mà! Yêu em nhất! 🥳🎉";
     mainGif.src = "images/bubu-dudu-2.gif";
     btnGroup.style.display = 'none';
   });
